@@ -1,16 +1,20 @@
 package tylermccarthy.buttonclickcounter;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button ourButton;
+    private TextView ourMessage;
+    private int clickCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,19 +24,33 @@ public class MainActivity extends AppCompatActivity {
         // This calls android code to go ahead and do so
         setContentView(R.layout.activity_main);
 
+        //Now that setContentView has been called we can link to our active elements
+        ourButton = (Button) findViewById(R.id.cookie_clicker);
+        ourMessage = (TextView) findViewById(R.id.textView);
+
+        View.OnClickListener ourClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount++;
+                ourMessage.setText("TIMES PRESSED: " + clickCount);
+            }
+        };
+
+        ourButton.setOnClickListener(ourClickListener);
         //TODO figure out what this is all about
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Is this the mail icon or something else?
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        // It is!
+        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });  */
     }
 
     @Override
