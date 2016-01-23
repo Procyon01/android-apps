@@ -34,10 +34,13 @@ public class GameDemo {
         Tyler.addInventoryItem(bluePotion);
 
         ArrayList<InventoryItem> items = Tyler.getInventoryItems();
-        System.out.println("\nTyler currently has in inventory:);
+        System.out.println("\nTyler currently has in inventory: ");
         for (InventoryItem i : items) {
-            System.out.println("Tyler currently has: "i.getName());
+            System.out.println(i.getName());
         }
+
+        Soldier soldier = new Soldier(25, 10);
+        soldier.takeDamage(5);
 
 
 
