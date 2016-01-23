@@ -21,7 +21,7 @@ public class Player {
         setLevel(1);
         setScore(0);
         setDefaultWeapon();
-        InventoryItems = new ArrayList<InventoryItem>();
+        this.inventoryItems = new ArrayList<InventoryItem>();
     }
 
     // Sorcery
@@ -33,16 +33,12 @@ public class Player {
 
     // More than one constructor, wheee
     public Player(String handleName, int lives, int level, int score){
-        super();
+        this();
         setHandleName(handleName);
         setLives(lives);
         setLevel(level);
         setScore(score);
         setDefaultWeapon();
-    }
-
-    private void setDefaultWeapon(){
-        this.weapon = new Weapon("Rusty Dagger", 1, 20);
     }
 
     public String getHandleName() {
@@ -51,7 +47,7 @@ public class Player {
 
     public void setHandleName(String handleName) {
         // Handle names should be at least 4 chars
-        if (handleName.length() >= 4){
+        if (handleName.length() <= 4){
             return;
         }
         this.handleName = handleName;
@@ -70,6 +66,9 @@ public class Player {
     }
 
     public void setLevel(int level) {
+        if (level <= 0){
+            return;
+        }
         this.level = level;
     }
 
@@ -78,11 +77,41 @@ public class Player {
     }
 
     public void setScore(int score) {
+        if (score <= 0){
+            return;
+        }
         this.score = score;
     }
 
     public Weapon getWeapon() {
         return weapon;
     }
+
+    public void setWeapon(Weapon wpn){
+        this.weapon = wpn;
+    }
+
+    private void setDefaultWeapon(){
+        this.weapon = new Weapon("Rusty Dagger", 1, 20);
+    }
+
+    public void addInventoryItem(InventoryItem inventoryItem){
+        inventoryItems.add(inventoryItem);
+    }
+
+    public boolean dropInventoryItem(InventoryItem inventoryItem){
+        if (this.inventoryItems.contains(inventoryItem)){
+            inventoryItems.remove(inventoryItem);
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<InventoryItem> getInventoryItems(){
+        return inventoryItems;
+    }
+
 }
+
+
 

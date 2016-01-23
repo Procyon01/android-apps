@@ -1,10 +1,11 @@
 package org.example.learn;
 
-import org.example.learn.OperandType;
-
 /**
  * Created by point on 1/21/2016.
  */
+
+enum OperandType {ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION}
+
 public class CalculatorModel {
 
     public double calculateInput(double in1, double in2, OperandType inOp){
