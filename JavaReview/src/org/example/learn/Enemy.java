@@ -16,6 +16,11 @@ public class Enemy {
         setName("Unremarkable Creep");
     }
 
+    public Enemy(int hitPoints, int lives){
+        setHitPoints(hitPoints);
+        setLives(lives);
+    }
+
     public int getHitPoints() {
         return hitPoints;
     }
@@ -42,7 +47,7 @@ public class Enemy {
 
     public void takeDamage(int damage) {
         setHitPoints(getHitPoints() - damage);
-
+        System.out.println("Dealt " + damage + " to enemy");
     }
 
 }

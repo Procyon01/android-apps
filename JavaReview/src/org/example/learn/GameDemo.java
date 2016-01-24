@@ -42,8 +42,9 @@ public class GameDemo {
         Soldier soldier = new Soldier(25, 10);
         soldier.takeDamage(5);
 
-
-
-
+        SuperSoldier superSoldier = new SuperSoldier(25, 1);
+        System.out.println("Hitpoints: " + superSoldier.getHitPoints());
+        superSoldier.takeDamage(10);
+        System.out.println("Hitpoints: " + superSoldier.getHitPoints());
     }
 }
