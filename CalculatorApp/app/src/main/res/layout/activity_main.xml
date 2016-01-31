@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"dd
+    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="point.calculatorapp.MainActivity"
@@ -13,12 +13,18 @@
     android:orientation="vertical"
     android:weightSum="1">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CLR"
+        android:id="@+id/btnClear" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Result:"
-        android:id="@+id/textView2"
+        android:text="@string/result_description"
+        android:id="@+id/txtResultDescription"
         android:layout_marginRight="25dp"
         android:layout_gravity="right" />
 
@@ -27,139 +33,69 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0.0"
-        android:id="@+id/textView3"
+        android:id="@+id/txtResult"
         android:layout_gravity="right"
         android:layout_marginRight="25dp"
-        android:textSize="72dp" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:textSize="56dp" />
 
         <EditText
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editText"
-            android:layout_marginTop="25dp"
-            android:textColor="#ffffff"
-            android:singleLine="false"
-            android:layout_gravity="left" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="88dp">
+            android:id="@+id/editOperand1"
+            android:layout_marginTop="25dp" />
 
         <EditText
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/editOperand2"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="37dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=" "
-            android:id="@+id/textView"
-            android:layout_weight="0.58" />
-    </LinearLayout>
-
-    <TableLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </TableLayout>
-
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="#747474"
         android:layout_marginTop="25dp">
 
-        <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="+"
-                android:id="@+id/button"
-                android:textSize="24dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/btnAddition"
+            android:textSize="24dp" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:id="@+id/button2"
-                android:textSize="24dp"
-                android:layout_column="1" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:id="@+id/btnSubtraction"
+            android:textSize="24dp"
+            android:layout_column="1" />
 
-            <Button
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:id="@+id/btnMultiplication"
+            android:textSize="24dp"
+            android:layout_column="4" />
+
+        <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/"
-                android:id="@+id/button3"
+                android:id="@+id/btnDivision"
                 android:textSize="24dp"
                 android:layout_column="3" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="*"
-                android:id="@+id/button4"
-                android:textSize="24dp"
-                android:layout_column="4" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="%"
-                android:id="@+id/button5"
-                android:textSize="24dp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="√"
-                android:id="@+id/button7"
-                android:layout_column="1"
-                android:layout_gravity="center_horizontal"
-                android:textSize="24dp" />
-
-        </TableRow>
-
-    </TableLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="="
-        android:id="@+id/button6"
-        android:layout_column="4"
-        android:layout_gravity="right"
-        android:layout_marginTop="25dp" />
+    </LinearLayout>
 
 </LinearLayout>
