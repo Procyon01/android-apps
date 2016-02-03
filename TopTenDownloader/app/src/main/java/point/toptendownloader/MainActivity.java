@@ -4,10 +4,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -25,10 +28,27 @@ Concepts and structures put into practice herein:
 
 public class MainActivity extends AppCompatActivity {
 
+    private String fileContents;
+    private Button btnParse;
+    private ListView listApps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btnParse = (Button) findViewById(R.id.btnParse);
+        listApps = (ListView) findViewById(R.id.listApps);
+
+        btnParse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseApplications parseApplications = new ParseApplications(fileContents);
+                parseApplications.process();
+            }
+        });
+
+        // Get XML file
         DownloadData dlData = new DownloadData();
         dlData.execute("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml");
     }
@@ -36,24 +56,26 @@ public class MainActivity extends AppCompatActivity {
     public class DownloadData extends AsyncTask<String, Void, String>{
         // Second param of AsyncTask is typically progress bar. Leaving for now
 
-        private String fileContents;
-
         @Override
         protected String doInBackground(String... params) {
             // "String... params": new in java, represents variable number of params in array
 
             fileContents = downloadXML(params[0]);
-            if (fileContents = null){
+            if (fileContents == null){
                 Log.d("DownloadData", "Error downloading item");
-                Toast.makeText("Error downloading item", Toast.LENGTH_LONG);
             }
-            return null;
+            return fileContents;
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            Log.d("DownloadData", "Result: " + s);
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.d("DownloadData", "Result: " + result);
+
+            // Add XML to view on screen
+            // Note: onPostExecute is where ALL UI element updates should be done for AsyncTask
+            // Tim Buchalka: you will get errors if trying to do so from another method.
+            //xmlView.setText(fileContents);
         }
 
         // Download XML file representing the top ten apps XML feed
@@ -68,12 +90,13 @@ public class MainActivity extends AppCompatActivity {
 
                 // said object apparently provides an object for the input stream
                 InputStream inStream = connection.getInputStream();
+                InputStreamReader inStreamRead = new InputStreamReader(inStream);
 
                 // Read one char at a time
                 int bytesRead;
                 char[] inputBuffer = new char[500];
-                while (true) {     // Negative
-                    bytesRead = inStream.read(inputBuffer);
+                while (true) {
+                    bytesRead = inStreamRead.read(inputBuffer);
                     if (bytesRead <= 0){
                         break;
                     }
@@ -83,9 +106,11 @@ public class MainActivity extends AppCompatActivity {
                 return xmlFileBuf.toString();
             } catch (IOException e) {
                 Log.d("DownloadData", "IO Exception caught reading data" + e.getMessage());
-
+            } catch (SecurityException e) {
+                Log.d("DownloadData", "Security permission not given" + e.getMessage());
             }
 
+            return null;
         }
 
     }
