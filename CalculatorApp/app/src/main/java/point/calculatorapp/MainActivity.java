@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 operand1.setText("");
                 operand2.setText("");
-                txtResult.setText("0.0");323
+                txtResult.setText("0.0");
                 operand1.requestFocus();
             }
         });
