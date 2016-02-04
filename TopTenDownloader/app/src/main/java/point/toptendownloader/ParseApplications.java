@@ -28,9 +28,9 @@ public class ParseApplications {
     public boolean process(){
 
         boolean success;
-        Application currentRecord;      // to add data from currently processing application entry
+        Application currentRecord = null;      // to add data from currently processing application entry
         boolean inEntry = false;        // checker for inside/outside an application entry
-        String textValue = "";
+        String textValue = "";          // XML field data
 
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -45,16 +45,33 @@ public class ParseApplications {
                 String tagName = xpp.getName();
                 switch (eventType){
                     case XmlPullParser.START_TAG:
-                        Log.d("ParseApplications", "Starting tag for " + tagName);
                         if (tagName.equalsIgnoreCase("entry")){
                             inEntry = true;
                             currentRecord = new Application();
-                            break;
                         }
+                        break;
+
+                    case XmlPullParser.TEXT:
+                        textValue = xpp.getText();
+                        break;
+
                     case XmlPullParser.END_TAG:
-                        Log.d("ParseApplications", "Ending tag for " + tagName);
+                        if (inEntry){
+                            if (tagName.equalsIgnoreCase("entry")) {
+                                applications.add(currentRecord);
+                                inEntry = false;
+                            } else if (tagName.equalsIgnoreCase("name")) {
+                                currentRecord.setName(textValue);
+                            } else if (tagName.equalsIgnoreCase("artist")){
+                                currentRecord.setArtist(textValue);
+                            } else if (tagName.equalsIgnoreCase("releaseDate")){
+                                currentRecord.setReleaseDate(textValue);
+                            }
+                        }
+                        break;
+
                     default:
-                        // Nope
+                        // noop
                 }
                 eventType = xpp.next();
             }
@@ -63,6 +80,16 @@ public class ParseApplications {
             success = false;
             e.printStackTrace();
         }
+
+        // Give us a little confirmation this worked
+        int count = 1;
+        for (Application app : applications){
+            Log.d("ParseApplications", "#" + count + " Name: " + app.getName());
+            Log.d("ParseApplications", "Artist: " + app.getArtist());
+            Log.d("ParseApplications", "Release Date: " + app.getReleaseDate());
+            count++;
+        }
+
         return true;
     }
 }

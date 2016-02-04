@@ -17,11 +17,11 @@ public class Application {
         this.name = name;
     }
 
-    public String getAuthor() {
+    public String getArtist() {
         return artist;
     }
 
-    public void setAuthor(String artist) {
+    public void setArtist(String artist) {
         this.artist = artist;
     }
 
@@ -32,4 +32,12 @@ public class Application {
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + getName() + "\n" +
+        "Artist: " + getArtist() + "\n" +
+        "Release Date: " + getReleaseDate() + "\n";
+    }
+
 }

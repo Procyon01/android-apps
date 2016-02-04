@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -19,12 +20,13 @@ This code highly resembles code done by Tim Buchalka in the Udemy course "Master
 Android 6.0 Marshmallow Apps Development Using Java". This is because, as part
 of the course, I am following along with his code.
 
-Concepts and structures put into practice herein:
+Concepts and structures learned and put into practice herein:
     AsyncTask
     Permissions
-
+    XMLPullParser (which, it turns out, kicks ass)
+    ArrayAdapter  (absolute sorcery!)
+    Intro to defining custom layouts
  */
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ParseApplications parseApplications = new ParseApplications(fileContents);
                 parseApplications.process();
+                ArrayAdapter<Application> arrayAdapter = new ArrayAdapter<Application>(
+                        MainActivity.this,
+                        R.layout.list_item,
+                        parseApplications.getApplications());
+                listApps.setAdapter(arrayAdapter);
             }
         });
 
