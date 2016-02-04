@@ -12,8 +12,8 @@ public class YoutubeActivity extends YouTubeBaseActivity
     implements YouTubePlayer.OnInitializedListener
 {
 
-    private String GOOGLE_API_KEY = "TBA";
-    private String YOUTUBE_VIDEO_ID = "TBA";
+    private String GOOGLE_API_KEY = "AIzaSyAnkyh0sihHDNywytDqc_74KF6a0r7whcI";
+    private String YOUTUBE_VIDEO_ID = "Ohdt_ohi8Q4"; //"I am so totally hacking!"
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class YoutubeActivity extends YouTubeBaseActivity
         Toast.makeText(this, "Youtube player initialized successfully", Toast.LENGTH_LONG).show();
 
         //Set up listeners for buttons such as stopping, starting etc
-        youTubePlayer.setPlaybackEventListener(playerStateChangeListener);
+        youTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
         youTubePlayer.setPlaybackEventListener(playbackEventListener);
 
         if (!wasRestored){
@@ -53,7 +53,7 @@ public class YoutubeActivity extends YouTubeBaseActivity
     private YouTubePlayer.PlaybackEventListener playbackEventListener = new YouTubePlayer.PlaybackEventListener() {
         @Override
         public void onPlaying() {
-            Toast.makeText(YoutubeActivity.this "Video playing", Toast.LENGTH_LONG).show();
+            Toast.makeText(YoutubeActivity.this, "Video playing", Toast.LENGTH_LONG).show();
         }
 
         @Override
