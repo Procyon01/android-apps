@@ -3,4 +3,9 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_youtube">Youtube Player</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_standalone">StandaloneActivity</string>
+    <string name="play_video">Play Video</string>
+    <string name="play_playlist">Play Playlist</string>
+    <string name="button_standalone_submenu">Standalone Submenu</string>
+    <string name="button_single_video">Play a single video</string>
 </resources>
