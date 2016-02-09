@@ -21,7 +21,7 @@ public class GetFlickrJsonData extends GetRawData {
 
     public GetFlickrJsonData(String searchCriteria, boolean matchAll) {
         super(null);
-        createAndUpdateUri(String searchCriteria, matchAll);
+        createAndUpdateUri(searchCriteria, matchAll);
         mPhotos = new ArrayList<Photo>();
     }
 
@@ -46,12 +46,12 @@ public class GetFlickrJsonData extends GetRawData {
                 .appendQueryParameter(NO_JSON_CALLBACK_PARAM, "1")
                 .build();
 
-        return mDestinationUri;
+        return mDestinationUri != null;
     }
 
     public void processResult() {
         if (getDownloadStatus() != DownloadStatus.OK){
-            log.e(LOG_TAG, "Error downloading raw file!");
+            Log.e(LOG_TAG, "Error downloading raw file!");
             return;
         }
 
