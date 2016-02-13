@@ -1,24 +1,15 @@
-package point.flickrbrowser;
+package point.securesms;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String LOG_TAG = "MainActivity";
-    private List<Photo> mPhotosList = new ArrayList<Photo>();
-    private RecyclerView mRecyclerView;
-    private FlickrRecyclerViewAdapter flickrRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +18,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //GetRawData rawData = new GetRawData("https://api.flickr.com/services/feeds/photos_public.gne?tags=android,marshmallow&format=json");
-        GetFlickrJsonData jsonData = new GetFlickrJsonData("android,lollipop", true);
-        jsonData.execute();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,36 +49,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    public class ProcessPhotos extends GetFlickrJsonData {
-
-        public ProcessPhotos(String searchCriteria, boolean matchAll) {
-            super(searchCriteria, matchAll);
-        }
-
-        public void execute() {
-            super.execute();
-            ProcessData processData = new ProcessData();
-            processData.execute();
-        }
-
-        public class ProcessData extends DownloadJsonData {
-
-            @Override
-            protected void onPostExecute(String webData) {
-                super.onPostExecute(webData);
-                flickrRecyclerViewAdapter = new FlickrRecyclerViewAdapter(MainActivity.this, getMPhotos());
-                mRecyclerView.setAdapter(flickrRecyclerViewAdapter);
-            }
-
-
-            super.onPostExecute(String theWebData);
-        }
-
-    }
-
-
-
-
-
 }
