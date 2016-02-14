@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -21,7 +23,7 @@ public class FlickrRecyclerViewAdapter extends RecyclerView.Adapter<FlickrImageV
     }
 
     @Override
-    public FlickrImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FlickrImageViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.browse, null);
         FlickrImageViewHolder flickrImageViewHolder = new FlickrImageViewHolder(view);
@@ -31,8 +33,13 @@ public class FlickrRecyclerViewAdapter extends RecyclerView.Adapter<FlickrImageV
     // This magical construction here is going to download all images that are viewed on screen
     // Using picasso.
     @Override
-    public void onBindViewHolder(FlickrImageViewHolder holder, int position, List<Object> payloads) {
-        super.onBindViewHolder(holder, position, payloads);
+    public void onBindViewHolder(FlickrImageViewHolder flickrImageViewHolder,int i) {
+        Photo photoItem = mPhotosList.get(i);
+        Picasso.with(mContext).load(photoItem.getmImage())
+                .error(R.drawable.placeholder)
+                .placeholder(R.drawable.placeholder)
+                .into(flickrImageViewHolder.thumbnail);
+        flickrImageViewHolder.title.setText(photoItem.getmTitle());
     }
 
     @Override
