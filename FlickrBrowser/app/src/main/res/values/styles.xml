@@ -1,7 +1,6 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-
     </style>
 
     <style name="Theme.Base" parent="AppTheme">
@@ -20,7 +19,7 @@
         <item name="android:colorControlHighlight">@color/flickrBackgroundColor</item>
         <item name="android:actionMenuTextColor">@color/flickrSecondaryTextColor</item>
         <item name="android:textColorSecondary">@color/flickrSecondaryBackground</item>
-        <item name="android:background">@color/flickrPrimaryBackground</item>
+        <item name="android:background">@color/flickrPrimaryBackgroundColor</item>
     </style>
 
     <style name="ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
