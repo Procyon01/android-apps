@@ -20,7 +20,6 @@ public class SearchActivity extends BaseActivity {
         activateToolBarWithHomeEnabled();
     }
 
-    @override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         final MenuItem searchItem = menu.findItem(R.id.search_view);
