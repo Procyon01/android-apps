@@ -19,4 +19,12 @@ public class BaseActivity extends ActionBarActivity {
         }
         return mToolbar;
     }
+
+    protected Toolbar activateToolBarWithHomeEnabled() {
+        activateToolbar();
+        if (mToolbar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        return mToolbar;
+    }
 }
