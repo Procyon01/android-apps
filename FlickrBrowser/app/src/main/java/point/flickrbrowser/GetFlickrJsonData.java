@@ -93,7 +93,7 @@ public class GetFlickrJsonData extends GetRawData {
         }
     }
 
-    public List<Photo> getMPhotos() {
+    public List<Photo> getPhotos() {
         return mPhotos;
     }
 
